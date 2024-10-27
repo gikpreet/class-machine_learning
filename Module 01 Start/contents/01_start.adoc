@@ -7,7 +7,7 @@
 == Table of Contents
 
 1. 데이터
-2. 데이터 분석
+2. 데이터 시각화
 3. 모델을 만들고 훈련
 4. K-Nearest Neighbor 알고리즘
 5. Scikit Leran 라이브러리를 사용하여 분석
