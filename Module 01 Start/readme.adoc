@@ -1,0 +1,8 @@
+link:./contents/01_start.adoc[간단한 머신러닝]
+
+* link:./contents/02_fish.adoc[데이터]
+* link:./contents/03_fish_analysis.adoc[데이터 시각화]
+* link:./contents/04_fish_ml.adoc[머신러닝]
+* link:./contents/05_k-nn_algorithm.adoc[K-최근접 이웃 알고리즘]
+* link:./contents/06_scikit_learn.adoc[Scikit Learn]
+* link:./contents/07_revisited.adoc[Resivited]
