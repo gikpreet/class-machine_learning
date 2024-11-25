@@ -1,0 +1,16 @@
+= Machine Learning (머신 러닝)
+
+* 1949년 Donald Olding Hebb의 Hebbian Learning Theory에서 시작됨
+** 복잡한 두뇌 모델링에 대해 Connectionism(연결주의)라는 용어를 사용
+** 인공 신경망을 사용하여 인지적 능력을 설명하는 심리철학 이론
+** 연결주의는 단순하고 병렬적인 계산 요소들의 대규모 연결망을 핵심 개념으로 삼음
+
+> 인지과학에서 설명하고 하는 인간의 인지적 능력 현상은 튜링 머신을 모델로 하는 계산주의(Computationalism)과 뇌의 뉴런을 모델로 하는 연결주의(Connectionism)으로 나누어짐
+
+* 1950년 Bayes 정리를 기초로 확률기반의 분류기가 연구됨
+* 1957년 Frank Rosenblatt가 Perceptron 개념 발표
+* 1981년 P. J. Werbos가 Multilayer Perceptron을 Back Propagation으로 계산하는 방법을 발표
+* 1986년 R. Quinlan이 머신러닝의 주류가 된 Decision Tree라는 알고리즘을 발표
+* 1995년에 Vapnik와 Cortes는 머신러닝 역사에서 한 획을 그은 Support Vector Machine(이하 SVM)을 발표
+* 1997년에 Leo Breiman은 Gradient Boosting이란 개념을 제안
+* 1995년 Tin Kam Ho가 일반적인 방법의 Random Decision Forests라는 개념을 최초로 발표

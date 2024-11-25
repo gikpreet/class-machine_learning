@@ -1,0 +1,6 @@
+= 샘플링 편향(Sampling bias)
+
+* 표본을 잘못 선택함으로써 통계 분석이 왜곡되는 현상
+
+
+https://mindthegraph.com/blog/ko/%EC%83%98%ED%94%8C%EB%A7%81-%ED%8E%B8%ED%96%A5/

@@ -1,0 +1,6 @@
+= AI (Artificial Intelligence)
+
+* 기계에서 인간의 지능을 모방하는 다양한 도구와 방법을 포괄함
+* 다양한 방법과 알고리즘이 사용 가능하여, 이해하고 파악하기 어려울 수 있음
+
+https://www.hpe.com/kr/ko/what-is/ai-models.html
