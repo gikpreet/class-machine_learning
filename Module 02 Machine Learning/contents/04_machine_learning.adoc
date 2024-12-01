@@ -14,7 +14,7 @@
 
 * 1950년 Bayes 정리를 기초로 확률기반의 분류기가 연구됨
 * 1957년 Frank Rosenblatt가 Perceptron 개념 발표
-* 1981년 P. J. Werbos가 Multilayer Perceptron을 Back Propagation으로 계산하는 방법을 발표
+* 1981년 P.J. Werbos가 Multilayer Perceptron을 Back Propagation으로 계산하는 방법을 발표
 * 1986년 R. Quinlan이 머신러닝의 주류가 된 Decision Tree라는 알고리즘을 발표
 * 1995년에 Vapnik와 Cortes는 머신러닝 역사에서 한 획을 그은 Support Vector Machine(이하 SVM)을 발표
 * 1997년에 Leo Breiman은 Gradient Boosting이란 개념을 제안
@@ -34,6 +34,9 @@
 
 image:../images/image02.png[]
 
+
+//// 
 https://modulabs.co.kr/blog/machine-learning/
 https://www.sap.com/korea/products/artificial-intelligence/what-is-machine-learning.html
 https://nlp.jbnu.ac.kr/AICBNU2019/slides/aijbnu_deeplearning_basics.pdf
+////
