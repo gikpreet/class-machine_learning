@@ -328,4 +328,6 @@ NumPy 모듈의 랜덤 함수를 사용하여 다양한 분포에서 난수를 �
 |uniform()|균등(0,1)에서 표본을 추출합니다
 |===
 
+////
 https://velog.io/@euisuk-chung/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%8B%9C%EA%B0%81%ED%99%94-%EB%A7%88%EC%8A%A4%ED%84%B0%ED%95%98%EA%B8%B0-Numpy
+////
