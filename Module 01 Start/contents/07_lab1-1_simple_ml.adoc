@@ -215,8 +215,8 @@ fish_target = [1] * 35 + [0] * 14
 
 Scikit Learn 패키지에서 K-Nearest Neighbors 알고리즘의 구현 클래스인 KNeighorsClassifier 객체를 생성하고, 훈련합니다. 아래 절차에 따릅니다.
 
-1. KNeighborsClassifier 클래스 객체를 생성합니다.
-머신 러닝 알고리즘을 구현한 프로그램일 모델(model)이라고 부릅니다. 프로그램이 아니더라도 알고리즘을 구체화 한 것을 모델이라고 합니다.
+1. KNeighborsClassifier 클래스 객체를 생성합니다. +
+머신 러닝 알고리즘을 구현한 프로그램을 모델(model)이라고 부릅니다. 프로그램이 아니더라도 알고리즘을 구체화 한 것을 모델이라고 합니다.
 +
 [source, python]
 ----

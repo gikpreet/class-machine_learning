@@ -1,0 +1,108 @@
+= 연습: 머신 러닝 프로그램
+
+이 연습에서는 Lab 1-1의 연습에 이어, 데이터를 훈련 세트와 테스트 세트로 나눈 후 Label을 작성하고 훈련을 실행한 후 결과를 예측합니다. 아래 절차에 따릅니다.
+
+== 실습 환경 준비
+
+여기에서는 Visual Studio Code의 Jupyter Notebook을 사용하여 연습을 수행합니다. 이 연습의 수행 환경은 Lab 1-1에서와 같습니다.
+
+1. Visual Studio Code를 실행합니다.
+2. 파일 메뉴에서 폴더 열기 를 클릭합니다.
+3. 연습을 수행할 폴더를 선택하고 확인 버튼을 클릭합니다.
+4. Visual Studio Code의 Explorer 에서 New Button을 클릭하여 새 파일을 만들고, 이름을 lab1-1.ipynb로 지정합니다.
+5. 오른쪽 위의 Select Kernel 을 클릭하고 Anaconda Python 환경을 선택합니다.
+6. + Code 버튼을 클릭하여 노트북을 시작합니다. 노트북의 이름을 lab3-1.ipynb로 지정합니다.
+
+== 라이브러리 import
+
+이 연습에서는 Pandas, Numpy, Matplotlib, SciketLearn 라이브러리를 사용합니다. 아래 절차에 따라 필요한 라이브러리를 import 합니다.
+
+1. 생성한 Code 노트에 아래 코드를 입력합니다.
++
+[source, python]
+----
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.neighbors import KNeighborsClassifier
+
+# 한글 처리
+plt.rcParams['font.family'] ='Malgun Gothic'
+plt.rcParams['axes.unicode_minus'] =False
+----
++
+2. Shift + Enter 를 클릭하여 작성한 코드를 실행합니다.
+
+== 데이터 준비
+
+사용되는 데이터는 Lab 1-1에서 준비한, 도미와 빙어 데이터를 합친 데이터와 같습니다.
+
+이 연습에서는 지도 학습을 수행합니다. 지도 학습에는 훈련을 위한 데이터와 정답(Label)데이터가 필요하므로, 여기에서 훈련 세트와 테스트 세트를 생성합니다.
+
+1. 아래 코드를 복사하여 Jupyter Notebook으로 붙여 넣고 실행합니다.
++
+[source, python]
+----
+# 0-34 인덱스 까지는 도미, 나머지 14개는 빙어
+fish_length = [25.4, 26.3, 26.5, 29.0, 29.0, 29.7, 29.7, 30.0, 30.0, 30.7, 31.0, 31.0, 
+                31.5, 32.0, 32.0, 32.0, 33.0, 33.0, 33.5, 33.5, 34.0, 34.0, 34.5, 35.0, 
+                35.0, 35.0, 35.0, 36.0, 36.0, 37.0, 38.5, 38.5, 39.5, 41.0, 41.0, 9.8, 
+                10.5, 10.6, 11.0, 11.2, 11.3, 11.8, 11.8, 12.0, 12.2, 12.4, 13.0, 14.3, 15.0]
+fish_weight = [242.0, 290.0, 340.0, 363.0, 430.0, 450.0, 500.0, 390.0, 450.0, 500.0, 475.0, 500.0, 
+                500.0, 340.0, 600.0, 600.0, 700.0, 700.0, 610.0, 650.0, 575.0, 685.0, 620.0, 680.0, 
+                700.0, 725.0, 720.0, 714.0, 850.0, 1000.0, 920.0, 955.0, 925.0, 975.0, 950.0, 6.7, 
+                7.5, 7.0, 9.7, 9.8, 8.7, 10.0, 9.9, 9.8, 12.2, 13.4, 12.2, 19.7, 19.9]
+----
++
+2. 아래 코드를 실행하여 훈련 데이터와 타겟 데이터를 생성합니다.
++
+[source, python]
+----
+fish_data = [[l, w] for l, w in zip(fish_length, fish_weight)]
+fish_target = [1] * 35 + [0] * 14
+----
+
+== 모델 생성
+
+여기에서는 Scikit Learn 패키지를  머신 러닝 모델을 생성합니다. Scikit Learn 패키지에서 K-Nearest Neighbors 알고리즘의 구현 클래스인 KNeighorsClassifier 객체를 생성하고, 훈련합니다. 아래 절차에 따릅니다.
+
+1. KNeighborsClassifier 클래스 객체를 생성합니다. 머신 러닝 알고리즘을 구현한 프로그램일 모델(model)이라고 부릅니다. 프로그램이 아니더라도 알고리즘을 구체화 한 것을 모델이라고 합니다.
++
+[source, python]
+----
+kn = KNeighborsClassifier()
+----
+
+== 훈련 및 평가
+
+위에서 준비한 데이터와 타겟(Label)을 사용하여 , 모델을 훈련한 후 평가합니다. 아래 절차에 따릅니다.
+
+1. 아래 코드를 실행하여 훈련 세트와 훈련 타겟을 생성합니다. 훈련 세트는 0에서 34개 까지의 데이터입니다.
++
+[source, python]
+----
+train_input = fish_data[:35]
+train_target = fish_target[:35]
+----
++
+2. 아래 코드를 실행하여 테스트 세트와 테스트 타겟을 생성합니다. 테스트 세트는 35번째 부터 마지막 데이터입니다.
++
+[source, python]
+----
+test_input = fish_data[35:]
+test_target = fish_target[35:]
+----
++
+3. 아래 코드를 실행하여 모델을 학습합니다.
++
+[source, python]
+----
+kn.fit(train_input, train_target)
+----
++
+4. 아래 코드를 실행하여 모델을 테스트합니다.
++
+[source, python]
+----
+kn.score(test_input, test_target)
+----
