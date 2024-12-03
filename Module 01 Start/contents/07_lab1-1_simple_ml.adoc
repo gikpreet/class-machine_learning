@@ -157,12 +157,14 @@ fig = plt.figure(figsize=(10,10))
 ax1 = fig.add_subplot(2,1,1)
 ax2 = fig.add_subplot(2,1,2)
 
-ax1.boxplot(x=[bream_weight, smelt_weight], labels=['도미','빙어'])
-ax1.set_title('도미/빙어 무게')
-ax2.boxplot(x=[bream_length, smelt_length], labels=['도미','빙어'])
-ax2.set_title('도미/빙어 길이')
-
-plt.show()
+ax1.scatter(x=bream_length,y=bream_weight)
+ax1.set_title('도미')
+ax1.set_xlabel('length')
+ax1.set_ylabel('weight')
+ax2.scatter(x=smelt_length,y=smelt_weight,color='red')
+ax2.set_title('빙어')
+ax2.set_xlabel('length')
+ax2.set_ylabel('weight')
 ----
 +
 2. Shift + Enter키를 눌러 코드를 실행하여, 데이터의 분포를 확인합니다.
@@ -182,6 +184,10 @@ plt.ylabel('weight')
 
 plt.show()
 ----
++
+4. Shift + Enter키를 눌러 코드를 실행하여, 데이터의 분포를 단일 차트에서 확인합니다.
++
+image:../images/image17.png[width=800]
 
 == 머신 러닝 데이터 준비
 

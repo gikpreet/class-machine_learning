@@ -1,4 +1,4 @@
-= 연습: 머신 러닝 프로그램
+= 연습: 지도 학습 머신 러닝 프로그램
 
 이 연습에서는 Lab 1-1의 연습에 이어, 데이터를 훈련 세트와 테스트 세트로 나눈 후 Label을 작성하고 훈련을 실행한 후 결과를 예측합니다. 아래 절차에 따릅니다.
 
@@ -100,9 +100,102 @@ test_target = fish_target[35:]
 kn.fit(train_input, train_target)
 ----
 +
-4. 아래 코드를 실행하여 모델을 테스트합니다.
+4. 아래 코드를 실행하여 모델을 평가합니다.
 +
 [source, python]
 ----
 kn.score(test_input, test_target)
 ----
++
+5. 평가 결과는 아래와 같습니다.
++
+----
+0.0
+----
+
+== 새 데이터로 평가
+
+평가 결과에 따라, 훈련과 테스트 데이터를 확인합니다. 아래 절차에 따릅니다.
+
+1. 아래 코드를 실행하여 훈련과 테스트 데이터를 DataFrame으로 변환합니다.
++
+[source, python]
+----
+columns = ['length', 'weight']
+df_train_input = pd.DataFrame(train_input, columns=columns)
+df_test_input = pd.DataFrame(test_input, columns=columns)
+----
++
+2. 무게가 30, 길이가 600인 데이터를 산점도 그래프에서 확인합니다.
++
+[source, python]
+----
+plt.scatter(x=df_train_input.length, y=df_train_input.weight)
+plt.scatter(30, 600, marker="x", color="red")
+plt.xlabel("length")
+plt.ylabel("weight")
+
+plt.show()
+----
++
+image:../images/image05.png[]
++
+3. 아래 코드를 실행하여 무게가 30, 길이가 600인 데이터를 판정합니다.
++
+[source, python]
+----
+kn.predict([[12,120]])
+----
++
+도미로 예측합니다.
++
+----
+array([1])
+----
++
+4. 무게가 15, 길이가 19.0인 데이터를 산점도 그래프에서 확인합니다.
++
+[source, python]
+----
+plt.scatter(x=df_train_input.length, y=df_train_input.weight)
+plt.scatter(15, 19.9, marker="x", color="red")
+plt.xlabel("length")
+plt.ylabel("weight")
+
+plt.show()
+----
++
+image:../images/image06.png[]
++
+5. 아래 코드를 실행하여 무게가 15, 길이가 19.9인 데이터를 판정합니다.
++
+[source, python]
+----
+kn.predict([[15,19.9]])
+----
++
+도미로 판정합니다.
++
+----
+array([1])
+----
+
+== 데이터 확인
+
+아래 코드를 실행하여 훈련 및 테스트 데이터와 target 데이터를 확인합니다.
+
+[source, python]
+----
+fig = plt.figure(figsize=(12,10))
+
+ax1 = fig.add_subplot(2,1,1)
+ax1.set_title('trainset - testset')
+ax2 = fig.add_subplot(2,1,2)
+ax2.set_title('train target - test target')
+
+ax1.scatter(x=df_train_input.length, y=df_train_input.weight)
+ax1.scatter(x=df_test_input.length, y=df_test_input.weight, color='red')
+ax2.boxplot(x=[train_target, test_target], tick_labels=['train','test'])
+----
+
+image:../images/image07.png[]
