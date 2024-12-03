@@ -30,7 +30,7 @@ from sklearn.neighbors import KNeighborsClassifier
 
 # 한글 처리
 plt.rcParams['font.family'] ='Malgun Gothic'
-plt.rcParams['axes.unicode_minus'] =False
+plt.rcParams['axes.unicode_minus'] = False
 ----
 +
 2. Shift + Enter 를 클릭하여 작성한 코드를 실행합니다.
@@ -94,21 +94,21 @@ smelt_weight = [6.7, 7.5, 7.0, 9.7, 9.8, 8.7, 10.0, 9.9, 9.8, 12.2, 13.4, 12.2, 
 +
 [source, python]
 ----
-fig = plt.figure(figsize=(10,10))
+fig = plt.figure(figsize=(10,7))
 
 ax1 = fig.add_subplot(2,2,1)
 ax2 = fig.add_subplot(2,2,2)
 ax3 = fig.add_subplot(2,2,3)
 ax4 = fig.add_subplot(2,2,4)
 
-ax1.hist(bream_weight,bins=10,edgecolor='black')
-ax1.set_title('도미 무게')
 ax2.hist(bream_length,bins=10,edgecolor='black')
 ax2.set_title('도미 길이')
-ax3.hist(smelt_weight,bins=10,edgecolor='black')
-ax3.set_title('빙어 무게')
+ax1.hist(bream_weight,bins=10,edgecolor='black')
+ax1.set_title('도미 무게')
 ax4.hist(smelt_length,bins=10,edgecolor='black')
 ax4.set_title('빙어 길이')
+ax3.hist(smelt_weight,bins=10,edgecolor='black')
+ax3.set_title('빙어 무게')
 ----
 +
 2. Shift + Enter키를 눌러 코드를 실행하여, 데이터의 분포를 확인합니다.
@@ -130,10 +130,10 @@ fig = plt.figure(figsize=(10,10))
 ax1 = fig.add_subplot(2,1,1)
 ax2 = fig.add_subplot(2,1,2)
 
-ax1.boxplot(x=[bream_weight, smelt_weight], labels=['도미','빙어'])
-ax1.set_title('도미/빙어 무게')
-ax2.boxplot(x=[bream_length, smelt_length], labels=['도미','빙어'])
-ax2.set_title('도미/빙어 길이')
+ax1.boxplot(x=[bream_length, smelt_length], labels=['도미','빙어'])
+ax1.set_title('도미/빙어 길이')
+ax2.boxplot(x=[bream_weight, smelt_weight], labels=['도미','빙어'])
+ax2.set_title('도미/빙어 무게')
 
 plt.show()
 ----

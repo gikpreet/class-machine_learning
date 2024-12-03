@@ -66,7 +66,8 @@ fish_target = [1] * 35 + [0] * 14
 
 여기에서는 Scikit Learn 패키지를  머신 러닝 모델을 생성합니다. Scikit Learn 패키지에서 K-Nearest Neighbors 알고리즘의 구현 클래스인 KNeighorsClassifier 객체를 생성하고, 훈련합니다. 아래 절차에 따릅니다.
 
-1. KNeighborsClassifier 클래스 객체를 생성합니다. 머신 러닝 알고리즘을 구현한 프로그램일 모델(model)이라고 부릅니다. 프로그램이 아니더라도 알고리즘을 구체화 한 것을 모델이라고 합니다.
+1. KNeighborsClassifier 클래스 객체를 생성합니다. +
+머신 러닝 알고리즘을 구현한 프로그램일 모델(model)이라고 부릅니다. 프로그램이 아니더라도 알고리즘을 구체화 한 것을 모델이라고 합니다.
 +
 [source, python]
 ----
@@ -75,7 +76,7 @@ kn = KNeighborsClassifier()
 
 == 훈련 및 평가
 
-위에서 준비한 데이터와 타겟(Label)을 사용하여 , 모델을 훈련한 후 평가합니다. 아래 절차에 따릅니다.
+위에서 준비한 데이터와 타겟(Label)을 사용하여, 모델을 훈련한 후 평가합니다. 아래 절차에 따릅니다.
 
 1. 아래 코드를 실행하여 훈련 세트와 훈련 타겟을 생성합니다. 훈련 세트는 0에서 34개 까지의 데이터입니다.
 +
@@ -126,7 +127,7 @@ df_train_input = pd.DataFrame(train_input, columns=columns)
 df_test_input = pd.DataFrame(test_input, columns=columns)
 ----
 +
-2. 무게가 30, 길이가 600인 데이터를 산점도 그래프에서 확인합니다.
+2. 길이가 30, 무게가 600인 데이터를 산점도 그래프에서 확인합니다.
 +
 [source, python]
 ----
@@ -144,7 +145,7 @@ image:../images/image05.png[]
 +
 [source, python]
 ----
-kn.predict([[12,120]])
+kn.predict([[30,600]])
 ----
 +
 도미로 예측합니다.
@@ -153,7 +154,7 @@ kn.predict([[12,120]])
 array([1])
 ----
 +
-4. 무게가 15, 길이가 19.0인 데이터를 산점도 그래프에서 확인합니다.
+4. 길이가 15, 무게가 19.0인 데이터를 산점도 그래프에서 확인합니다.
 +
 [source, python]
 ----
@@ -167,7 +168,7 @@ plt.show()
 +
 image:../images/image06.png[]
 +
-5. 아래 코드를 실행하여 무게가 15, 길이가 19.9인 데이터를 판정합니다.
+5. 아래 코드를 실행하여 길이가 15, 무게가 19.9인 데이터를 판정합니다.
 +
 [source, python]
 ----
