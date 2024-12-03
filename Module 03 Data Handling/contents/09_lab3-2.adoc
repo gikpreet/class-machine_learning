@@ -184,3 +184,35 @@ kn.predict([[15,19.9]])
 ----
 array([0])
 ----
+
+== 문제점
+
+길이가 25, 무게가 150인 클래스는 도미로 분류되는게 맞습니다.
+
+[source, python]
+----
+columns = ['length', 'weight']
+df_train_input = pd.DataFrame(train_input, columns=columns)
+df_test_input = pd.DataFrame(test_input, columns=columns)
+
+
+plt.scatter(x=df_train_input.length, y=df_train_input.weight)
+plt.scatter(25, 150, marker="x", color="red")
+plt.xlabel("length")
+plt.ylabel("weight")
+
+plt.show()
+----
+
+image:../images/image09.png[]
+
+하지만, 빙어로 평가됩니다.
+
+[source, python]
+----
+kn.predict([[25,150]])
+----
+
+----
+array([0])
+----
