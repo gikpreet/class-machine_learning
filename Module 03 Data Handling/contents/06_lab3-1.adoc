@@ -9,9 +9,9 @@
 1. Visual Studio Code를 실행합니다.
 2. 파일 메뉴에서 폴더 열기 를 클릭합니다.
 3. 연습을 수행할 폴더를 선택하고 확인 버튼을 클릭합니다.
-4. Visual Studio Code의 Explorer 에서 New Button을 클릭하여 새 파일을 만들고, 이름을 lab1-1.ipynb로 지정합니다.
+4. Visual Studio Code의 Explorer 에서 New Button을 클릭하여 새 파일을 만들고, 이름을 lab3-1.ipynb로 지정합니다.
 5. 오른쪽 위의 Select Kernel 을 클릭하고 Anaconda Python 환경을 선택합니다.
-6. + Code 버튼을 클릭하여 노트북을 시작합니다. 노트북의 이름을 lab3-1.ipynb로 지정합니다.
+6. + Code 버튼을 클릭하여 노트북을 시작합니다.
 
 == 라이브러리 import
 
