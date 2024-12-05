@@ -59,3 +59,4 @@ image:../images/image12.png[]
 image:../images/image03.png[width=600]
 
 회귀 직선은 항상 x 평균과 y 평균값을 지납니다.
+
