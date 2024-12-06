@@ -16,7 +16,7 @@ height = [84,95,140,155,119,175,145,197,150]
 
 image:../images/image01.png[width=600]
 
-산점도에 적합한 직선을 찾는 방법 중의 한 가지는, 직선으로부터 y 값의 전체 편차를 최소화하는 것입니다. 분산을 정의할때와 똑같이 y가 직선에서 떨어진 거리를 제곱해서 모두 더하면 오차 제곱합(SSE) - 또는 잔차제곱합(RSS) - 이 됩니다.
+산점도에 적합한 직선을 찾는 방법 중의 한 가지는, 직선으로부터 y 값의 전체 편차를 최소화하는 것입니다. 분산을 정의할때와 똑같이 y가 직선에서 떨어진 거리를 제곱해서 모두 더하면 오차 제곱합(SSE - Sum of Squares of Error) 이 됩니다.
 
 image:../images/image02.png[width=200]
 
@@ -60,3 +60,6 @@ image:../images/image03.png[width=600]
 
 회귀 직선은 항상 x 평균과 y 평균값을 지납니다.
 
+////
+https://www.youtube.com/watch?v=aq8VU5KLmkY
+////
