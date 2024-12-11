@@ -61,7 +61,7 @@ perch_weight = np.array([5.9, 32.0, 40.0, 51.5, 70.0, 100.0, 78.0, 80.0, 85.0, 8
 +
 [source, python]
 ----
-train_input, test_input, train_target, test_target = train_test_split(perch_length, perch_weight, random_state=50)
+train_input, test_input, train_target, test_target = train_test_split(perch_length, perch_weight, random_state=42)
 
 train_input = train_input.reshape(-1, 1)
 test_input = test_input.reshape(-1, 1)
@@ -71,4 +71,120 @@ test_input = test_input.reshape(-1, 1)
 
 여기에서는 다항 회귀를 위한 데이터를 준비합니다.
 
-weight = a
+_weight = a x length^2^ + b x length + c_ 의 그래프로 학습되도록 구성됩니다. 아래 절차에 따릅니다.
+
+1. 아래 코드를 실행하여 다항 회귀 데이터를 생성합니다. 이 데이터는 원래 특성인 length를 제곱하여 왼쪽 열에 추가했으므로, 훈련 세트와 테스트 세트 모두 열이 2대로 늘어납니다.
++
+[source, python]
+----
+train_poly = np.column_stack((train_input ** 2, train_input))
+test_poly = np.column_stack((test_input ** 2, test_input))
+----
++
+2. 아래 코드를 실행하여 데이터의 생김새를 확인합니다.
++
+[source, python]
+----
+print(train_poly.shape)
+print(test_poly.shape)
+----
+
+== 모델 생성
+
+여기에서는 Scikit Learn 패키지에서 LinearRegression 모델을 생성합니다. Scikit Learn 패키지에서 선형 회귀 알고리즘의 구현 클래스인 LinearRegression 객체를 생성합니다. 아래 절차에 따릅니다.
+
+1. 아래 코드를 생성하여 LinearRegression 클래스 객체를 생성합니다.
++
+[source, python]
+----
+lr = LinearRegression()
+----
+
+== 훈련 및 평가
+
+위에서 준비한 다항 회귀 데이터를 사용하여, 모델을 훈련한 후 평가합니다. 아래 절차에 따릅니다.
+
+1. 아래 코드를 실행하여 모델을 훈련합니다. 
++
+[source, python]
+----
+lr.fit(train_poly, train_target)
+----
++
+2. 아래 코드를 실행하여 훈련을 수행합니다.
++
+[source, python]
+----
+lr.score(test_poly, test_target)
+----
+
+== 예측
+
+새 데이터를 사용하여 농어의 길이로 무게를 예측합니다. 아래 절차에 따릅니다.
+
+1. 아래 코드를 실행하여 길이가 50cm인 농어의 무게를 예측합니다.
++
+[source, python]
+----
+lr.predict([[50**2, 50]])
+----
++
+----
+array([1573.98423528])
+----
++
+2. 아래 코드를 실행하여 길이가 100cm인 농어의 무게를 예측합니다.
++
+[source, python]
+----
+lr.predict([[100**2, 100]])
+----
++
+----
+array([8103.57880667])
+----
++
+3. 아래 코드를 실행하여 무게가 15cm인 농어의 무게를 예측합니다.
++
+[source, python]
+----
+lr.predict([[15**2, 15]])
+----
++
+----
+array([20.90606071])
+----
++
+4. 아래 코드를 실행하여 모델의 상관 계수와 절편을 확인합니다.
++
+[source, python]
+----
+[  1.01433211 -21.55792498] 116.05021078278259
+----
++
+모델은 아래와 같은 그래프를 학습했음을 알 수 있습니다.
++
+_weight = 1.01 * length^2^ - 21.6 * length + 116.05_
++
+5. 아래 코드를 실행하여 산점도 플롯에서 예측한 데이터의 위치를 확인합니다.
++
+[source, python]
+----
+plt.figure(figsize=(12,5))
+point = np.arange(15, 50)
+
+plt.scatter(train_input, train_target)
+
+plt.plot(point, 1.01 * point ** 2 - 21.6 * point + 116.05)
+
+plt.scatter(50, 1573.8, marker='x', color='red')
+plt.scatter(15, 20.9, marker='x', color='red')
+plt.xlabel('length')
+plt.ylabel('weight')
+
+plt.show()
+----
++
+image:../images/image34.png[]
+
+실습이 종료되었습니다.
