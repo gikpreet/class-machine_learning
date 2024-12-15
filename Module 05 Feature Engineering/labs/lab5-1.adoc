@@ -1,0 +1,38 @@
+= Lab 5-1 다중 회귀
+
+이 연습에서는 농어의 길이만을 사용했던 이전 예제에서 높이와 두께를 사용하여 농어의 무게를 예측합니다. 아래 절차에 따릅니다.
+
+== 실습 환경 준비
+
+여기에서는 Visual Studio Code의 Jupyter Notebook을 사용하여 연습을 수행합니다. 이 연습의 수행 환경은 Lab 1-1에서와 같습니다.
+
+1. Visual Studio Code를 실행합니다.
+2. 파일 메뉴에서 폴더 열기 를 클릭합니다.
+3. 연습을 수행할 폴더를 선택하고 확인 버튼을 클릭합니다.
+4. Visual Studio Code의 Explorer 에서 New Button을 클릭하여 새 파일을 만들고, 이름을 lab3-1.ipynb로 지정합니다.
+5. 오른쪽 위의 Select Kernel 을 클릭하고 Anaconda Python 환경을 선택합니다.
+6. + Code 버튼을 클릭하여 노트북을 시작합니다.
+
+== 라이브러리 import
+
+이 연습에서는 Pandas, Numpy, Matplotlib, Scikit Learn 라이브러리를 사용합니다. 아래 절차에 따라 필요한 라이브러리를 import 합니다.
+
+1, 생성한 Code 노트에 아래 코드를 입력합니다.
++
+[source, python]
+----
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsRegressor
+import matplotlib.pyplot as plt
+
+# 한글 처리
+plt.rcParams['font.family'] ='Malgun Gothic'
+plt.rcParams['axes.unicode_minus'] = False
+----
++
+2. Shift + Enter 를 클릭하여 작성한 코드를 실행합니다.
+
+== 데이터 준비
+
