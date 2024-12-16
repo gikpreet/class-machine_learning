@@ -36,3 +36,30 @@ plt.rcParams['axes.unicode_minus'] = False
 
 == 데이터 준비
 
+이 연습에서는 농어의 길이와 무게 데이터에 더해, 높이와 두께가 데이터를 추가로 사용합니다. 아래 절차에 따릅니다.
+
+1. https://github.com/gikpreet/class-machine_learning/blob/main/Module%2005%20Feature%20Engineering/data/perch.csv 에서 소스 파일을 다운로드 합니다.
+2. 아래와 유사한 코드를 실행하여 데이터를 DataFrame으로 로드하고 데이터를 확인합니다.
++
+[source, python]
+----
+df = pd.read_csv('../data/perch.csv')
+df.head()
+----
++
+[%header, cols="1,2,2,2" width=50%]
+|===
+||	length|	height|	width
+|0|	8.4|	2.11|	1.41
+|1|	13.7|	3.53|	2.00
+|2|	15.0|	3.82|	2.43
+|3|	16.2|	4.59|	2.63
+|4|	17.4|	4.59|	2.94
+|===
++
+3. 다음 코드를 실행하여 데이터 프레임을 numpy 배열로 변환하고, 데이터를 확인합니다.
+[source, python]
+----
+perch_full = df.to_numpy()
+print(perch_full)
+----
