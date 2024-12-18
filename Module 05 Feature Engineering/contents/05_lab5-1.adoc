@@ -56,10 +56,47 @@ df.head()
 |3|	16.2|	4.59|	2.63
 |4|	17.4|	4.59|	2.94
 |===
-+
+
 3. 다음 코드를 실행하여 데이터 프레임을 numpy 배열로 변환하고, 데이터를 확인합니다.
++
 [source, python]
 ----
 perch_full = df.to_numpy()
 print(perch_full)
+----
++
+4. Target 데이터는 이전의 데이터를 그대로 사용합니다. 아래 코드를 실행합니다.
++
+[source, python]
+----
+perch_weight = np.array([5.9, 32.0, 40.0, 51.5, 70.0, 100.0, 78.0, 80.0, 85.0, 85.0, 110.0,
+       115.0, 125.0, 130.0, 120.0, 120.0, 130.0, 135.0, 110.0, 130.0,
+       150.0, 145.0, 150.0, 170.0, 225.0, 145.0, 188.0, 180.0, 197.0,
+       218.0, 300.0, 260.0, 265.0, 250.0, 250.0, 300.0, 320.0, 514.0,
+       556.0, 840.0, 685.0, 700.0, 700.0, 690.0, 900.0, 650.0, 820.0,
+       850.0, 900.0, 1015.0, 820.0, 1100.0, 1000.0, 1100.0, 1000.0,
+       1000.0])
+----
++
+5. 아래 코드를 실행하여 학습 세트와 테스트 세트를 나눕니다.
++
+[source, python]
+----
+train_input, test_input, train_target, test_target = train_test_split(perch_full, perch_weight, random_state=42)
+----
+
+== 특성 추가
+
+Scikit Learn은 특성을 만들거나 전처리 하기 위한 다양한 클래스를 제공합니다. 이런 클래스를 변환기(transformer) 라고 부릅니다. Transformer 클래스의 fit(), transform() 메소드를 사용하여 작업을 수행할 수 있습니다. 이 연습에서는 PolynomialFeatures 클래스를 사용하여 특성을 생성합니다. 아래 절차에 따릅니다.
+
+1. 아래 코드를 실행하여 새 특성을 추가합니다.
++
+[source, python]
+----
+from sklearn.preprocessing import PolynomialFeatures
+
+poly = PolynomialFeatures()
+poly.fit(train_input)
+train_poly = poly.transform(train_input)
+test_poly = poly.transform(test_input)
 ----

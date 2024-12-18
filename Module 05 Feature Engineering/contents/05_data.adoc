@@ -1,3 +1,0 @@
-= 데이터의 이해
-
-== Table of Contents

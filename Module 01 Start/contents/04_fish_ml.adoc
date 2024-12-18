@@ -3,7 +3,7 @@
 * Scikit Learn(사이킷런) 라이브러리 사용
 * K-최근접 이웃 알고리즘(KNN - K-Nearest Neighbor Algirithm) 사용
 * 길이와 무게를 하나의 데이터로 2차원 리스트로 데이터를 준비
-* 훈련(training) 데이터와 타겟(target) 데이터 준비
+* 학습(training) 데이터와 타겟(target) 데이터 준비
 
 ---
 
@@ -42,7 +42,7 @@ KNeighborsClassifier 객체를 생성합니다.
 kn = KNeighborsClassifier
 ----
 
-KNeighborsClassifier 객체에 데이터와 타겟을 전달하여 학습을 수행할 수 있습니다. 이런 과정을 머신러닝에서는 `training(훈련)` 이라고 하며, Scikit Learn에서는 fit 메소드를 사용합니다. 
+KNeighborsClassifier 객체에 데이터와 타겟을 전달하여 학습을 수행할 수 있습니다. 이런 과정을 머신러닝에서는 `training(학습 또는 훈련)` 이라고 하며, Scikit Learn에서는 fit 메소드를 사용합니다. 
 
 [source, python]
 ----

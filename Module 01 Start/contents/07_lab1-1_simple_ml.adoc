@@ -217,9 +217,9 @@ fish_data = [[l,w] for l, w in zip(length, weight)]
 fish_target = [1] * 35 + [0] * 14
 ----
 
-== Scikit learn K-Nearest Neighbors 모델 생성 후 훈련
+== Scikit learn K-Nearest Neighbors 모델 생성 후 학습습
 
-Scikit Learn 패키지에서 K-Nearest Neighbors 알고리즘의 구현 클래스인 KNeighorsClassifier 객체를 생성하고, 훈련합니다. 아래 절차에 따릅니다.
+Scikit Learn 패키지에서 K-Nearest Neighbors 알고리즘의 구현 클래스인 KNeighorsClassifier 객체를 생성하고, 학습습합니다. 아래 절차에 따릅니다.
 
 1. KNeighborsClassifier 클래스 객체를 생성합니다. +
 머신 러닝 알고리즘을 구현한 프로그램을 모델(model)이라고 부릅니다. 프로그램이 아니더라도 알고리즘을 구체화 한 것을 모델이라고 합니다.
@@ -230,14 +230,14 @@ kn = KNeighborsClassifier()
 ----
 +
 2. kn 객체에 데이터와 타겟 데이터를 사용하여 도미를 찾기 위한 기준을 학습시킵니다. +
-이런 과정을 머신 러닝에서는 훈련(training)이라고 합니다. 머신 러닝 라이브러리에서는 fit() 메소드를 사용하여 훈련을 수행합니다.
+이런 과정을 머신 러닝에서는 학습(training)이라고 합니다. 머신 러닝 라이브러리에서는 fit() 메소드를 사용하여 학습습을 수행합니다.
 +
 [source, python]
 ----
 kn.fit(fish_data, fish_target)
 ----
 +
-3. score() 메소드를 사용하여 훈련 결과를 평가합니다.
+3. score() 메소드를 사용하여 학습습 결과를 평가합니다.
 +
 [source, python]
 ----
@@ -281,7 +281,7 @@ image:../images/image16.png[]
 
 == K값 확장
 
-K-Nearest Neighbor 알고리즘은 특별히 훈련되는 것이 없이 fit() 메소드에 전달한 데이터를 모두 저장하고 있다가 새로운 데이터가 등장하면 가장 가까운 데이터를 참고하여 생선을 구분합니다. KNeighborClassifier 클래스는 기본적으로 5대의 데이터를 참조하여 많은 수의 데이터로 값을 예측합니다. K 값은 변경할 수 있습니다. 아래 절차에 따릅니다.
+K-Nearest Neighbor 알고리즘은 특별히 학습되는 것이 없이 fit() 메소드에 전달한 데이터를 모두 저장하고 있다가 새로운 데이터가 등장하면 가장 가까운 데이터를 참고하여 생선을 구분합니다. KNeighborClassifier 클래스는 기본적으로 5대의 데이터를 참조하여 많은 수의 데이터로 값을 예측합니다. K 값은 변경할 수 있습니다. 아래 절차에 따릅니다.
 
 1. KNeigborsClssifier 객체를 생성하면서 n_neighbors 파라미터에 49를 전달합니다. +
 데이터 근처의 49개 데이터를 대상으로 하여 많은 값을 예측값으로 산출합니다.
@@ -291,7 +291,7 @@ K-Nearest Neighbor 알고리즘은 특별히 훈련되는 것이 없이 fit() �
 kn49 = KNeighborsClassifier(n_neighbors=49)
 ----
 +
-2. 생성한 kn49 모델을 기반으로 훈련을 수행합니다.
+2. 생성한 kn49 모델을 기반으로 학습을 수행합니다.
 +
 [source, python]
 ----
