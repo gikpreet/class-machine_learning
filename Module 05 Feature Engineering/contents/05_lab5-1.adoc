@@ -131,7 +131,6 @@ lr.score(train_poly, train_target)
 +
 4. 아래 코드를 실행하여 테스트 세트로 모델을 평가합니다.
 +
-+
 [source, python]
 ----
 lr.score(test_poly, test_target)
