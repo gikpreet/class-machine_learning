@@ -17,7 +17,7 @@ ANOVA는 1918년 로널드 피셔에 의해 개발된 통계학적 테스트이�
 
 image:../images/image13.png[]
 
-이것을 계량화 해 보며면, 그래프의 식은
+이것을 계량화 해 보면, 그래프의 식은
 
 image:../images/image14.png[]
 
@@ -43,7 +43,7 @@ image:../images/image16.png[]
 모든 잔차를 곱한 후 평균을 구한 값입니다. 제곱을 수행함으로 오차가 양수로 변환되며, 이는 큰 오차를 더 크게 반영하는 특징이 있습니다.
 * 평균 절대 오차(MAE, Mean Absolute Error) +
 모든 잔차의 절대값을 평균한 값입니다. 이는 각 오차의 절대값으로 고려하여 오차의 크기를 평가합니다.
-* 결정 계수(Coefficient if Determination, R^2^) +
+* 결정 계수(Coefficient if Determination, _R^2^_) +
 모델이 데이터의 변동성을 얼마나 설명하는지를 나타내는 지표이며, 0과 1사이의 값을 가집니다. 1에 가까울 수록 모델이 데이터를 잘 설명한다는 의미입니다.
 
 image:../images/image15.png[]
