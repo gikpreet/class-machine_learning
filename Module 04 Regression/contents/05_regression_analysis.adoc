@@ -106,4 +106,4 @@ N: 데이터 포인트의 개수 +
 
 절편을 구하는 공식은 아래와 같습니다.
 
-image:../images/image3ㅛ.png[]
+image:../images/image37.png[]
