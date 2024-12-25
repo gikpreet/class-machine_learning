@@ -11,7 +11,7 @@
 * 활용되는 함수
 ** 로지스틱 회귀는 시그모이드 함수를 사용하여 출력값을 확률로 변환
 +
-image:../images/image02.png[]
+image:../images/image02.png[width=140]
 +
 𝑧 = 𝑤𝑋 + 𝑏(선형 결합).
 * 결과 해석

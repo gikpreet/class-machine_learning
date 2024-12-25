@@ -1,4 +1,191 @@
 = Lab 6-1 KNN 분류기를 이용한 분류
 
-이 연습에서는 특정한 경우에 선택될 수 있는 생선의 종류를 구하는 머신러닝 프로그램을 작성합니다.
+이 연습에서는 특정한 경우에 선택될 수 있는 생선의 종류에 대한 확률을 구하는 머신러닝 프로그램을 작성합니다.
 
+== 실습 환경 준비
+
+여기에서는 Visual Studio Code의 Jupyter Notebook을 사용하여 연습을 수행합니다. 이 연습의 수행 환경은 Lab 1-1에서와 같습니다.
+
+1. Visual Studio Code를 실행합니다.
+2. 파일 메뉴에서 폴더 열기 를 클릭합니다.
+3. 연습을 수행할 폴더를 선택하고 확인 버튼을 클릭합니다.
+4. Visual Studio Code의 Explorer 에서 New Button을 클릭하여 새 파일을 만들고, 이름을 lab3-1.ipynb로 지정합니다.
+5. 오른쪽 위의 Select Kernel 을 클릭하고 Anaconda Python 환경을 선택합니다.
+6. + Code 버튼을 클릭하여 노트북을 시작합니다.
+
+== 라이브러리 import
+
+이 연습에서는 Pandas, Numpy, Matplotlib, Scikit Learn 라이브러리를 사용합니다. 아래 절차에 따라 필요한 라이브러리를 import 합니다.
+
+1. 생성한 Code 노트에 아래 코드를 입력합니다.
++
+[source, python]
+----
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.preprocessing import PolynomialFeatures
+import matplotlib.pyplot as plt
+----
++
+2. Shift + Enter 를 클릭하여 작성한 코드를 실행합니다.
+
+== 데이터 준비
+
+이 연습에서는 종류, 무게, 길이, 대각선 길이, 높이, 무게등 6개의 특성을 가지는 생선 데이터를 사용합니다. 아래 절차에 따릅니다.
+
+1. https://github.com/gikpreet/class-machine_learning/blob/main/Module%2006%20Prediction_Classification/data/fish.csv 에서 데이터 파일을 다운로드합니다.
+2. 아래와 유사한 코드를 실행하여 데이터를 DataFrame으로 로드하고 데이터를 확인합니다.
++
+[source, python]
+----
+df_fish = pd.read_csv('../data/fish.csv')
+df_fish.head()
+----
++
+[%header, cols=7, width=500]
+|===
+||Species|Weight|Length|Diagonal|Height|Width
+|0|Bream|242.0|25.4|30.0|11.5200|4.0200
+|1|Bream|290.0|26.3|31.2|12.4800|4.3056
+|2|Bream|340.0|26.5|31.1|12.3778|4.6961
+|3|Bream|363.0|29.0|33.5|12.7300|4.4555
+|4|Bream|430.0|29.0|34.0|12.4440|5.1340
+|===
++
+3. 아래 코드를 실행하여 생선의 종류를 확인합니다.
++
+[source, python]
+----
+print(pd.unique(df_fish.Species))
+----
++
+----
+['Bream' 'Roach' 'Whitefish' 'Parkki' 'Perch' 'Pike' 'Smelt']
+----
++
+4. 아래 코드를 실행하여 입력 데이터를 준비합니다.
++
+[source, python]
+----
+fish_input = df_fish[['Weight','Length','Diagonal','Height','Width']].to_numpy()
+----
++
+5. 아래 코드를 실행하여 타겟 데이터를 준비합니다.
++
+[source, python]
+----
+fish_target = df_fish.Species.to_numpy()
+----
++
+6. 아래 코드를 실행하여 학습 세트와 테스트 세트를 준비합니다.
++
+[source, python]
+----
+train_input, test_input, train_target, test_target = train_test_split(fish_input, fish_target, random_state=42)  
+----
+
+== 정규화
+
+여기서는 StandardScalar 객체를 사용하여 학습 세트와 테스트 세트를 정규화합니다. 아래 절차에 따릅니다.
+
+1. 아래 코드를 실행하여 학습 세트와 테스트 세트를 정규화합니다.
++
+[source, python]
+----
+ss = StandardScaler()
+ss.fit(train_input)
+train_scaled = ss.transform(train_input)
+test_scaled = ss.transform(test_input)
+----
+
+== KNeighborClassifier 모델로 학습 및 평가
+
+여기에서는 Scikit Learn의 KNeighborClassifier 클래스 객체를 만들고 훈련 세트로 모델을 훈련한 다음 학습 세트와 테스트 세트의 점수를 확인합니다. 아래 절차에 따릅니다.
+
+1. 아래 코드를 실행하여 KNeighborClassifier 객체를 생성합니다.
++
+[source, python]
+----
+kn = KNeighborsClassifier(n_neighbors=3)
+----
++
+2. 아래 코드를 실행하여 학습 세트와 학습 타겟 세트를 사용하여 모델을 학습합니다.
++
+[source, python]
+----
+kn.fit(train_scaled, train_target)
+----
++
+3. 아래 코드를 실행하여 모델을 평가합니다.
++
+[source, python]
+----
+print(kn.score(train_scaled, train_target))
+print(kn.score(test_scaled, test_target))
+----
+
+== 예측
+
+훈련 세트와 테스트 세트의 타겟 데이터에는 7 종류의 생선의 데이터가 포함되어 있습니다. 타겟 데이터에 2개 이상의 클래스가 포함되어 있는 문제를 다중 분류(multi-class classification)이라고 합니다.
+
+이진 분류의 다중 분류의 모델을 만들고 학습하는 방식은 이전 연습에서의 이진 분류와 동일합니다. 이전 분류를 사용했을 때는 0과 1로 클래스를 지정하여 타겟 데이터를 만들었으나, Scikit Learn에서는 문자열로 된 타겟을 사용할 수 있습니다.
+
+여기서는 테스트 세트의 데이터를 사용하여 데이터가 어떤 생선으로 예측되는지를 실습합니다. 아래 절차에 따릅니다.
+
+1. 아래 코드를 실행하여 테스트 세트의 첫 번째 데이터를 사용하여 예측을 수행합니다.
++
+[source, python]
+----
+result = kn.predict(test_scaled[:1])
+print(result)
+----
++
+----
+['Perch']
+----
++
+2. 다음 코드를 실행하여 첫 번째 테스트 데이터의 값을 확인합니다.
++
+[source, python]
+----
+test_scaled[:1]
+----
++
+----
+array([[-0.88741352, -0.91804565, -1.03098914, -0.90464451, -0.80762518]])
+----
++
+3. 아래 코드를 실행하여 예측값에 대한 확률 예측치를 return 받습니다.
++
+[source, python]
+----
+proba = kn.predict_proba(test_scaled[:1])
+----
++
+4. 아래 코드를 실행하여 모델에 포함된 클래스와 epdlxjdp eogks 예측 확률 값을 출력합니다.
++
+[source, python]
+----
+print(kn.classes_)
+print(np.round(proba, decimals=4))
+----
++
+----
+['Bream' 'Parkki' 'Perch' 'Pike' 'Roach' 'Smelt' 'Whitefish']
+[[0. 0. 1. 0. 0. 0. 0.]]
+----
++
+5. 아래 코드를 실행하여 K 범위에 포함된 값을 확인합니다.
++
+[source, python]
+----
+distances, indexes = kn.kneighbors(test_scaled[:1])
+print(train_target[indexes])
+----
++
+----
+[['Perch' 'Perch' 'Perch']]
+----
