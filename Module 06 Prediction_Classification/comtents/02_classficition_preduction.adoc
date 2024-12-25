@@ -1,4 +1,4 @@
-= 예측(Prediction) 모델과 분류(Classification) 모델 모델
+= 예측(Prediction) 모델과 분류(Classification) 모델
 
 분류와 예측은 지도 학습과 관련된 개념으로, 목적과 사용하는 기술에서 차이가 있습니다. 예측 모델은 연속적인 숫자 값을 예측하는데 사용되며, 분류 모델은 미리 정의된 여러 클래스 중 하나로 분류하는데 사용됩니다. 
 
@@ -6,6 +6,6 @@
 
 == Table of Contents
 
-1. 개요
+1. 예측 모델과 분류 모델 개요
 2. 예측(Prediction) 모델
 3. 분류(Classification) 모델
