@@ -1,4 +1,4 @@
-= Lab 4-2 Linear Regression
+= Lab 4-3 Linear Regression
 
 이 연습에서는 선형 회귀 모델을 사용하여 농어의 길이를 사용해서 무게를 예측하는 머신 러닝 프로그램을 작성합니다. 아래 절차에 따릅니다.
 

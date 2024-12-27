@@ -1,4 +1,4 @@
-= Lab 4-3 Polynormal Regression
+= Lab 4-4 Polynormal Regression
 
 이 연습에서는 다항 회귀를 사용하여 농어의 길이를 이용하여 무게를 예측합니다. 아래 절차에 따릅니다.
 
