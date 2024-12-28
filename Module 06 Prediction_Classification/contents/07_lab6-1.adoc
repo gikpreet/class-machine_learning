@@ -34,7 +34,7 @@ import matplotlib.pyplot as plt
 
 == 데이터 준비
 
-이 연습에서는 종류, 무게, 길이, 대각선 길이, 높이, 무게등 6개의 특성을 가지는 생선 데이터를 사용합니다. 아래 절차에 따릅니다.
+이 연습에서는 종류, 무게, 길이, 대각선 길이, 높이, 두께등 6개의 특성을 가지는 생선 데이터를 사용합니다. 아래 절차에 따릅니다.
 
 1. https://github.com/gikpreet/class-machine_learning/blob/main/Module%2006%20Prediction_Classification/data/fish.csv 에서 데이터 파일을 다운로드합니다.
 2. 아래와 유사한 코드를 실행하여 데이터를 DataFrame으로 로드하고 데이터를 확인합니다.
@@ -45,7 +45,7 @@ df_fish = pd.read_csv('../data/fish.csv')
 df_fish.head()
 ----
 +
-[%header, cols=7, width=500]
+[%header, cols=7, width="500"]
 |===
 ||Species|Weight|Length|Diagonal|Height|Width
 |0|Bream|242.0|25.4|30.0|11.5200|4.0200
