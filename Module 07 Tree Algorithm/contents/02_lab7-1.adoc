@@ -36,4 +36,143 @@ import matplotlib.pyplot as plt
 
 이 연습에서는 kaggle에서 다운로드한 와인 데이터를 사용합니다. 데이터는 와인의 알코올 도수, 산도, 당도와 레드와인, 화이트 와인을 포함합니다. 아래 절차에 따릅니다.
 
-1. 
+1. https://github.com/gikpreet/class-machine_learning/blob/main/Module%2007%20Tree%20Algorithm/data/wine.csv 에서 데이터를 다운로드 합니다.
+2. 아래와 유사한 코드를 실행하여 데이터를 DataFrame으로 로드하고 데이터를 확인합니다.
++
+[source, python]
+----
+df_wine = pd.read_csv('../data/wine.csv')
+df_wine.head()
+----
++
+[%header, cols=="4", width"500"]
+|===
+||alcohol|sugar|pH|class
+|0|	9.4|1.9|3.51|	0.0
+|1|	9.8|2.6|3.20|	0.0
+|2|	9.8|2.3|3.26|	0.0
+|3|	9.8|1.9|3.16|	0.0
+|4|	9.4|1.9|3.51|	0.0
+|===
++
+3. 아래 코드를 실행하여 와인의 종류를 확인합니다.
++
+[source, python]
+----
+df_wine['class'].unique()
+## 0: red wine, 1: white wine
+----
++
+4. 아래 코드를 실행하여 데이터를 확인합니다.
++
+[source, python]
+----
+df_wine.info()
+----
++
+----
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 6497 entries, 0 to 6496
+Data columns (total 4 columns):
+ #   Column   Non-Null Count  Dtype  
+---  ------   --------------  -----  
+ 0   alcohol  6497 non-null   float64
+ 1   sugar    6497 non-null   float64
+ 2   pH       6497 non-null   float64
+ 3   class    6497 non-null   float64
+dtypes: float64(4)
+memory usage: 203.2 KB
+----
++
+5. 아래 코드를 실행하여 데이터의 분포를 확인합니다.
++
+[source, python]
+----
+df_wine.describe()
+----
++
+[%header, cols=="4", width"500"]
+|===
+||alcohol|sugar|pH|class
+|count|	6497.000000|6497.000000|6497.000000|	6497.000000
+|mean|	10.491801|	5.443235|	3.218501|	0.753886
+|std|	1.192712|	4.757804|	0.160787|	0.430779
+|min|	8.000000|	0.600000|	2.720000|	0.000000
+|25%|	9.500000|	1.800000|	3.110000|	1.000000
+|50%|	10.300000|	3.000000|	3.210000|	1.000000
+|75%|	11.300000|	8.100000|	3.320000|	1.000000
+|max|	14.900000|	65.800000|	4.010000|	1.000000
+|===
++
+6. DataFrame의 alcohol, sugar, pH는 분류를 위한 데이터(독립 변수)에 해당되고, class는 분류 결과(종속 변수)에 해당됩니다. 아래 코드를 실행하여 독립 변수 데이터와 종속 변수 데이터를 분리하여 데이터 세트를 만듭니다.
++
+[source, python]
+----
+data = df_wine[['alcohol','sugar','pH']].to_numpy()
+target = df_wine['class'].to_numpy()
+----
++
+7. 아래 코드를 실행하여 훈련 세트, 훈련 타겟, 테스트 세트, 테스트 타겟 데이터를 나눕니다. 테스트 데이터는 전체 데이터의 20%로 지정합니다.
++
+[source, python]
+----
+train_input, test_input, train_target, test_target = train_test_split(data, target, test_size=0.2, random_state=42)
+----
++
+8. 아래 코드를 실행하여 데이터의 개수와 차원을 확인합니다.
++
+[source, python]
+----
+print(train_input.shape)
+print(test_input.shape)
+----
++
+----
+(5197, 3)
+(1300, 3)
+----
+
+== 정규화
+
+와인 데이터의 알코올 도수는 %를, 당도는 g/l를, 산도는 g을 사용합니다. 다른 스케일을 사용하는 데이터에 대해 정규화를 적용합니다. 아래 절차에 따릅니다.
+
+1. 아래 코드를 실행하여 StandardScaler() 객체를 생성합니다.
++
+[source, python]
+----
+ss = StandardScaler()
+----
++
+2. 아래 코드를 실행하여 데이터를 학습하고 정규화된 학습 세트와 테스트 세트를 만듭니다.
++
+[source, python]
+----
+ss.fit(train_input)
+train_scaled = ss.transform(train_input)
+test_scaled = ss.transform(test_input)
+----
+
+== 모델 생성, 학습, 평가
+
+여기에서는 생성한 LogisticRegression 모델을 학습 데이터로 학습하고, 평가합니다. 아래 절차에 따릅니다.
+
+1. LogisticRegression 회귀 모델을 생성합니다.
++
+[source, python]
+----
+lr = LogisticRegression()
+----
++
+2. 아래 코드를 실행하여 학습 세트와 테스트 세트로 학습합니다.
++
+[source, python]
+----
+print(lr.score(train_scaled, train_target))
+print(lr.score(test_scaled, test_target))
+----
++
+----
+0.7808350971714451
+0.7776923076923077
+----
+
