@@ -136,7 +136,7 @@ target_test_bream_smalt = test_target[bream_smelt_test_indexes]
 
 여기에서는 Scikit Learn의 LogisticRegression 클래스 객체를 만들고 훈련 세트로 모델을 훈련한 다음 학습 세트와 테스트 세트의 점수를 확인합니다. 아래 절차에 따릅니다.
 
-1. 아래 코드를 실행하여 KNeighborClassifier 객체를 생성합니다.
+1. 아래 코드를 실행하여 LogisticRegression 객체를 생성합니다.
 +
 [source, python]
 ----
