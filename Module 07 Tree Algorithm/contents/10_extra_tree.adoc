@@ -1,0 +1,85 @@
+= Extra Tree
+
+엑스트라 트리(Extra-Trees, Extremely Randomized Trees)는 결정 트리(Decision Tree) 기반의 앙상블 학습 방법입니다. "Extra"는 **Extreme Randomness(극단적인 무작위성)**을 의미하며, 이를 통해 모델의 다각성과 일반화 성능을 높이는 데 초점을 둔 알고리즘입니다.
+
+엑스트라 트리는 **랜덤 포레스트(Random Forest)**와 유사한 점이 많지만, 몇 가지 차별화된 특징을 가집니다.
+
+== 엑스트라 트리의 특징
+
+1. 극단적인 무작위성
+엑스트라 트리는 일반적인 결정 트리나 랜덤 포레스트보다 더 많은 무작위성을 추가합니다:
+
+* 특성 분할 지점: 랜덤 포레스트는 각 노드에서 일부 랜덤한 특성만 선택하여 최적의 분할 지점을 찾는 반면, 엑스트라 트리는 완전히 무작위로 분할 지점을 선택합니다.
+* 이로 인해 각 트리의 구조가 더 다양해지고, 모델 간 상관성이 줄어들어 앙상블의 성능이 향상될 수 있습니다.
+2. 부트스트랩 샘플링 없음
+* 랜덤 포레스트는 데이터에서 부트스트랩 샘플링(복원 추출)을 사용해 트리를 생성하지만, 엑스트라 트리는 기본적으로 전체 데이터를 사용합니다.
+* 단, 원한다면 부트스트랩을 활성화할 수 있습니다(bootstrap=True).
+3.  앙상블 방식
+* 엑스트라 트리는 여러 개의 무작위 트리를 생성한 뒤, 각 트리의 예측 결과를 **평균(회귀)**하거나 다수결(분류) 방식으로 결합합니다.
+
+== 엑스트라 트리의 장점
+1. 빠른 학습 속도
+* 분할 지점을 임의로 선택하기 때문에, 계산 비용이 낮아 결정 트리나 랜덤 포레스트보다 빠르게 학습합니다.
+2. 과적합 방지
+* 무작위성이 높아 트리 간 상관성이 줄어들고, 데이터에 과적합될 가능성이 낮아집니다.
+3. 좋은 일반화 성능
+* 다양한 트리를 앙상블로 결합하여 안정적이고 일반화 성능이 높은 결과를 제공합니다.
+4. 간단한 구현
+* 랜덤 포레스트와 구조가 유사해 쉽게 구현 가능하며, scikit-learn에서 제공되는 인터페이스를 활용할 수 있습니다.
+
+== 단점
+1. 노이즈에 민감
+* 무작위성이 높기 때문에, 데이터에 노이즈가 많으면 성능이 저하될 수 있습니다.
+2. 특성 중요도 해석 어려움
+* 분할 과정이 무작위로 이루어지기 때문에, 각 특성의 중요도를 정확히 평가하기 어려울 수 있습니다.
+3. 데이터에 따라 성능 차이
+* 무작위성이 높은 구조로 인해, 일부 데이터셋에서는 랜덤 포레스트보다 성능이 낮을 수 있습니다.
+
+== 엑스트라 트리의 동작 과정
+학습 과정:
+* 특성 샘플링: 각 노드에서 랜덤하게 일부 특성을 선택.
+* 분할 지점 선정: 선택된 특성에서 임의의 분할 값으로 데이터를 나눔.
+* 트리 생성: 위 과정을 반복하여 다수의 트리를 생성.
+* 앙상블: 모든 트리의 결과를 합산하거나 투표.
+
+== 랜덤 포레스트와 엑스트라 트리 비교
++
+[%header, cols=3, width=600]
+|===
+|특징|랜덤 포레스트|엑스트라 트리
+|노드 분할 방식|최적의 분할 지점을 계산|완전히 무작위로 분할 지점 선택
+|부트스트랩 사용|기본적으로 사용|기본적으로 사용하지 않음
+|학습 속도|느림 (특히 대규모 데이터셋에서)|빠름
+|무작위성 정도|중간 정도의 무작위성|높은 무작위성
+|과적합 위험|과적합 가능성 더 낮음|과적합 가능성 낮음
+|성능|대체로 안정적, 특히 대규모 데이터에서 잘 작동|작은 데이터셋에서는 랜덤 포레스트보다 좋을 수 있음
+|===
+
+== 구현 예제 (Python: scikit-learn)
+
+[source, python]
+----
+from sklearn.ensemble import ExtraTreesClassifier, ExtraTreesRegressor
+from sklearn.datasets import make_classification, make_regression
+from sklearn.model_selection import train_test_split
+
+# 분류 문제
+X, y = make_classification(n_samples=1000, n_features=20, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Extra-Trees Classifier
+clf = ExtraTreesClassifier(n_estimators=100, random_state=42)
+clf.fit(X_train, y_train)
+print(f"분류 정확도: {clf.score(X_test, y_test)}")
+
+# 회귀 문제
+X_reg, y_reg = make_regression(n_samples=1000, n_features=20, random_state=42)
+X_train_reg, X_test_reg, y_train_reg, y_test_reg = train_test_split(X_reg, y_reg, test_size=0.2, random_state=42)
+
+# Extra-Trees Regressor
+reg = ExtraTreesRegressor(n_estimators=100, random_state=42)
+reg.fit(X_train_reg, y_train_reg)
+print(f"회귀 R^2 점수: {reg.score(X_test_reg, y_test_reg)}")
+----
+
+엑스트라 트리는 랜덤 포레스트의 대안으로, 무작위성을 더욱 강화한 방식으로 특정 상황에서 성능이 더 우수할 수 있습니다.

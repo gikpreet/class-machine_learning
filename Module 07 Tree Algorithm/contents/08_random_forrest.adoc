@@ -1,4 +1,4 @@
-== 랜덤 포레스트(Random Forest)란?
+= 랜덤 포레스트(Random Forest)
 
 **랜덤 포레스트(Random Forest)**는 앙상블 학습(Ensemble Learning) 기법 중 하나로, 여러 개의 **결정 트리(Decision Tree)**를 사용하여 예측의 정확성을 높이고 과적합을 방지하는 알고리즘입니다. 분류(Classification)와 회귀(Regression) 문제 모두에 사용됩니다.
 
@@ -44,6 +44,7 @@ image:../images/image16.png[]
 * 회귀 문제: 개별 트리의 예측 결과를 평균(Averaging)하여 최종 값을 예측합니다.
 
 == 랜덤 포레스트의 하이퍼파라미터
+
 1. 트리 수 (n_estimators):
 * 생성할 트리의 개수. 일반적으로 트리 수가 많을수록 성능이 좋아지지만 계산 비용도 증가합니다.
 2. 최대 깊이 (max_depth):

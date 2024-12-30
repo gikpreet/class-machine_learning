@@ -1,0 +1,121 @@
+= 히스토그램 기반 그래디언트 부스팅
+
+히스토그램 기반 그래디언트 부스팅(Histogram-Based Gradient Boosting)은 **그래디언트 부스팅(Gradient Boosting)**의 변형으로, 데이터의 연속형 특성을 **히스토그램(bin)**으로 분할하여 학습 속도를 개선하고 메모리 사용량을 줄이는 방법입니다. 이 방식은 특히 대규모 데이터셋에서 효율적인 성능을 보여줍니다.
+
+== 히스토그램 기반 그래디언트 부스팅의 주요 아이디어
+
+히스토그램 기반 그래디언트 부스팅은 다음과 같은 과정을 통해 기존 그래디언트 부스팅을 개선합니다.
+
+1. 히스토그램 분할
+* 연속형 특성을 고정된 개수의 **빈(bin)**으로 나눕니다.
+* 각 특성의 값을 히스토그램에 매핑하여 동일한 범위에 속하는 값을 같은 **빈(bin)**으로 처리합니다.
+* 이로 인해 연속형 값에 대해 계산해야 할 분할 지점의 수가 감소합니다.
+2. 히스토그램에서 분할 점 선택
+* 히스토그램의 빈(bin)마다 누적된 그래디언트와 헷세이안(Hessian)을 계산하여, 최적의 분할 지점을 선택합니다.
+* 이 방식은 원본 데이터 대신 히스토그램에서 직접 계산하므로 속도와 메모리 효율이 크게 향상됩니다.
+
+== 동작 과정
+
+1. 데이터 히스토그램화
+* 모든 연속형 특성을 고정된 개수의 빈(bin)으로 나눕니다(예: 256개).
+* 각 데이터 포인트를 해당하는 빈(bin)으로 매핑합니다.
+2. 그래디언트 및 헷세이안 계산
+* 손실 함수의 그래디언트와 헷세이안을 계산합니다(헷세이안은 2차 미분 값).
+3. 최적 분할 점 선택
+* 히스토그램의 각 빈(bin)에서 그래디언트와 헷세이안을 누적하여 최적의 분할 지점을 찾습니다.
+4. 결정 트리 생성
+* 위 과정에서 선택된 분할 지점을 기반으로 트리를 만듭니다.
+5. 반복
+* 각 단계에서 잔차(Residual)를 줄이기 위해 새로운 트리를 추가합니다.
+
+== 장점
+
+1. 학습 속도 향상:
+* 히스토그램 분할을 통해 계산량을 줄여 학습 속도가 크게 증가합니다.
+2. 메모리 효율성:
+* 연속형 데이터를 히스토그램으로 변환하여 메모리 사용량을 줄입니다.
+3. 대규모 데이터 처리:
+* 대규모 데이터셋에서도 효율적으로 학습할 수 있습니다.
+4. 노이즈 저항성:
+* 히스토그램으로 데이터를 구간화함으로써 노이즈의 영향을 줄입니다.
+5. 특성 선택 효과:
+* 각 특성을 히스토그램으로 변환하면 중요하지 않은 특성이 자동으로 무시되는 경향이 있어 특성 선택의 효과를 제공합니다.
+
+== 단점
+
+1. 정밀도 손실:
+* 히스토그램화로 인해 분할 지점의 정밀도가 약간 손실될 수 있습니다.
+2. 빈(bin) 개수 설정 필요:
+* 적절한 빈(bin) 개수를 설정하지 않으면 성능이 저하될 수 있습니다.
+3. 복잡한 데이터 처리:
+* 범주형 데이터나 복잡한 데이터 변환에는 추가적인 처리 단계가 필요할 수 있습니다.
+
+== 활용
+
+1. 대규모 데이터셋
+* 히스토그램 분할 덕분에 대량의 데이터를 효율적으로 처리할 수 있습니다.
+2. 실시간 애플리케이션
+* 빠른 학습과 예측 속도로 실시간 응용 프로그램에 적합합니다.
+3. 고차원 데이터
+* 많은 특성을 가진 데이터셋에서 메모리와 계산 효율성을 제공.
+
+== 예제
+
+Scikit-learn은 히스토그램 기반 그래디언트 부스팅을 지원하는 HistGradientBoostingClassifier와 HistGradientBoostingRegressor를 제공합니다.
+
+=== 분류
+
+[source, python]
+----
+from sklearn.experimental import enable_hist_gradient_boosting  # 실험적 기능
+from sklearn.ensemble import HistGradientBoostingClassifier
+from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
+
+# 데이터 생성
+X, y = make_classification(n_samples=1000, n_features=20, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# 히스토그램 기반 그래디언트 부스팅 분류 모델
+hgb_clf = HistGradientBoostingClassifier(max_iter=100, learning_rate=0.1, max_depth=3, random_state=42)
+hgb_clf.fit(X_train, y_train)
+
+# 성능 평가
+print(f"Accuracy: {hgb_clf.score(X_test, y_test)}")
+
+----
+
+=== 회귀
+
+[source, python]
+----
+from sklearn.experimental import enable_hist_gradient_boosting  # 실험적 기능
+from sklearn.ensemble import HistGradientBoostingRegressor
+from sklearn.datasets import make_regression
+from sklearn.model_selection import train_test_split
+
+# 데이터 생성
+X, y = make_regression(n_samples=1000, n_features=20, noise=0.1, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# 히스토그램 기반 그래디언트 부스팅 회귀 모델
+hgb_reg = HistGradientBoostingRegressor(max_iter=100, learning_rate=0.1, max_depth=3, random_state=42)
+hgb_reg.fit(X_train, y_train)
+
+# 성능 평가
+print(f"R^2 Score: {hgb_reg.score(X_test, y_test)}")
+----
+
+== 비교
+
+[%header, cols=3, width=600]
+|===
+|특징|기본 그래디언트 부스팅|히스토그램 기반 그래디언트 부스팅
+|속도|느림|빠름
+|메모리 사용량|큼|적음
+|정밀도|높음|히스토그램화로 인해 약간 손실
+|대규모 데이터셋 처리|상대적으로 비효율적|효율적
+|복잡도|중간|낮음 (히스토그램화로 간소화)
+|===
+
+히스토그램 기반 그래디언트 부스팅은 빠른 학습, 메모리 효율성, 대규모 데이터셋 처리 능력으로 머신러닝의 다양한 응용 분야에서 강력한 도구로 자리 잡고 있습니다. Scikit-learn, LightGBM, CatBoost 등이 이 방식을 효과적으로 구현한 라이브러리를 제공합니다.
