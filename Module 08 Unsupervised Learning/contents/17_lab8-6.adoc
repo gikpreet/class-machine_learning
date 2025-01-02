@@ -1,4 +1,4 @@
-= Lab 8-5 주 성분 분석을 통한 차원 축소
+= Lab 8-6 주 성분 분석을 통한 차원 축소
 
 이 연습에서는 PCA를 사용하여 차원을 축소한 후 여러 LogisticRegression 모델과 KMeans 사용하여 회귀와 분류를 수행합니다. 아래 절차에 따릅니다.
 
@@ -53,7 +53,7 @@ fruits_2d = fruits.reshape(-1, 100 * 100)
 target = np.array([0] * 100 + [1] * 100 + [2] * 100)
 ----
 
-== 교차검증
+== 로지스틱 회귀를 사용한 차원 축소 모델 검증증
 
 여기에서는 로지스틱 회귀 모델을 생성하고 모델의 성능을 평가합니다. 아래 절차에 따릅니다.
 
@@ -96,7 +96,7 @@ print(np.mean(scores['fit_time']))
 from sklearn.decomposition import PCA
 ----
 +
-2. 아래 코드를 실행하여 PCA 모델을 생성하고 과일 데이터의 차원을 축소합니다.
+2. 아래 코드를 실행하여 PCA 모델을 생성하고 과일 데이터의 차원을 축소합니다. 주 성분으로 50개를 사용합니다.
 +
 [source, python]
 ----
@@ -119,4 +119,94 @@ print(np.mean(scores['fit_time']))
 0.011842918395996094
 ----
 +
-4. 아래 코드를 실행하여 차원을 0.5
+4. 아래 코드를 실행하여 주 성분 비율을 0.5로 지정하고 PCA 모델을 생성하고 학습합니다. 이 경우, PCA는 분산의 50%에 달하는 주 성분을 찾습니다.
++
+[source, python]
+----
+pca = PCA(n_components=0.5)
+pca.fit(fruits_2d)
+----
++
+5. 아래 코드를 실행하여 모델의 주 성분 개수를 확인합니다.
++
+[source, python]
+----
+print(pca.n_components_)
+----
++
+6. 아래 코드를 실행하여 데이터를 주 성분을 사용하여 차원 축소합니다.
++
+[source, python]
+----
+fruits_pca = pca.transform(fruits_2d)
+print(fruits_pca.shape)
+----
++
+7. 아래 코드를 실행하여 교차 검증을 수행합니다.
++
+[source, python]
+----
+scores = cross_validate(lr, fruits_pca, target)
+print(np.mean(scores['test_score']))
+print(np.mean(scores['fit_time']))
+----
++
+----
+0.99
+0.02562880516052246
+----
+
+== KMeans를 사용한 차원 축소 검증
+
+여기에서는 차원 축소된 데이터를 사용하여 KMeans 모델을 사용하여 분류를 수행합니다. 아래 절차에 따릅니다.
+
+1. 아래 코드를 실행하여 KMeans 모델을 생성하고 차원 축소된 데이터를 사용하여 학습합니다.
++
+[source, python]
+----
+from sklearn.cluster import KMeans
+
+km = KMeans(n_clusters=3, random_state=42)
+km.fit(fruits_pca)
+----
++
+2. 아래 코드를 실행하여 분류 결과를 확인합니다.
++
+[source, python]
+----
+print(np.unique(km.labels_, return_counts=True))
+----
++
+3. 아래 코드를 실행하여 그림을 출력하는 draw_fruits() 함수를 작성합니다.
++
+[source, python]
+----
+def draw_fruits(arr, ratio=1):
+    n = len(arr)
+    rows = int(np.ceil(n / 10))
+    cols = n if rows < 2 else 10
+
+    fig, axs = plt.subplots(rows, cols, figsize=(cols * ratio, rows * ratio), squeeze=False)
+
+    for i in range(rows):
+        for j in range(cols):
+            if i * 10 + j < n:
+                axs[i, j].imshow(arr[i * 10 + j], cmap='gray_r')
+            axs[i, j].axis('off')
+    plt.show()
+----
++
+4. 아래 코드를 실행하여 분류 결과를 확인합니다.
++
+[source, python]
+----
+for label in range(0, 3):
+    draw_fruits(fruits[km.labels_ == label])
+    print("\n")
+----
++
+image:../images/image48.png[]
++
+image:../images/image49.png[]
++
+image:../images/image50.png[]
