@@ -10,3 +10,25 @@
 * 각 알고리즘을 평가하고, 평가 결과를 도출하여 비교합니다.
 
 2. IoT 센서에서 다운로드한 데이터를 사용하여 아래 분석을 수행하세요.
+* https://github.com/gikpreet/class-machine_learning/blob/main/Module%2008%20Unsupervised%20Learning/homework/data.tgz 데이터를 다운로드하고 압축을 해제합니다.
+* 데이터 중, temperature.csv 파일에는 아래와 같은 데이터가 포함되어 있습니다.
+** name: 수집한 데이터의 종류
+** type: timestamp 형식으로 저장된 시간
+** branch: 수집 장소
+** device: 데이터를 수집한 센서 장치
+** gateway: 센서 게이트웨이 장치 번호
+** host: 센서 데이터 수집 호스트
+** name: 데이터 종류
+** place: 수집 장소 분류 1
+** site: 수집 장소 분류 2
+** spot: 수집 위치
+** type: 데이터 종류
+** value: 수집된 값
+* 위 데이터를 사용하여 아래 분석을 수행합니다.
+a. 월별 평균 온도 계산
+b. 요일별 평균 온도 계산
+c. 이상치 분석
+* 위 데이터를 사용하여 아래 예측을 수행합니다.
+a. 월별 평균 온도 예측
+b. 요일별 평균 온도 예측
+c. 시간대별 평균 온도 예측측
