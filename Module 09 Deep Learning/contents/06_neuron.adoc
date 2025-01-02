@@ -1,0 +1,13 @@
+= 신경망 (Neuron Network)
+
+신경망(Neural Network)은 딥러닝의 핵심 구성 요소로, 인간의 뇌에서 영감을 받아 설계된 수학적 모델입니다. 데이터를 학습하고 패턴을 인식하며 복잡한 문제를 해결하는 데 사용됩니다. 
+
+이 단원에서는 신경망에 대해 알아봅니다.
+
+== Table of Contents
+
+. 신경망 개요
+. 퍼셉트론(Perceptron)
+. 인공 신경망(ANN)의 구조
+. 활성화 함수(Activation Functions)
+. 손실 함수(Loss Functions)와 최적화(Optimization)

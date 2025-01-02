@@ -4,6 +4,7 @@
 
 == Table of Contents
 
+1. Deep Learning 개요
 ////
 딥러닝 교재 목차
 제1부: 딥러닝 기초
