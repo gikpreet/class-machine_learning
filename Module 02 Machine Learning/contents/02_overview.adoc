@@ -1,0 +1,9 @@
+= 인공지능과 머신 러닝 개요
+
+== Table of Contents
+
+1. Artifical Intelligence(인공지능)의 역사
+2. AI (Artificial Intelligence)
+3. Machine Learning (머신 러닝)
+4. Deep Learning
+5. 머신 러닝의 학습 방법
